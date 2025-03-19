@@ -3,11 +3,17 @@ const bcrypt=require("bcryptjs")
 const jwt=require("jsonwebtoken")
 
 exports.signup=async(req,res)=>{
-    const {email,password}=req.body
+    try{
+        const {email,password}=req.body
     const hashedPassword=await bcrypt.hash(password,10)
     const user=new User({email,password:hashedPassword})
     await user.save()
     res.json({message:"User saved Successfully"})
+    }catch(error)
+    {
+        console.log(error);
+        res.status(400).json({message:"Internal server error"},error);
+    }
     
 }
 exports.login=async(req,res)=>{

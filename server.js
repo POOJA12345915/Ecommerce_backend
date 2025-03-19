@@ -5,18 +5,9 @@ const router = require('./routes/authRoutes');
 const cartRouter = require('./routes/cartRoutes');
 
 const app=express();
-const allowedOrigins=["ecommerce-frontend-eta-five.vercel.app"]
+// const allowedOrigins=["ecommerce-frontend-eta-five.vercel.app"]
 
-app.use(cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allows cookies and authentication headers if needed
-  }))
+app.use(cors({origin:'ecommerce-frontend-eta-five.vercel.app'}))
 
 app.use(express.json())
 app.use("/auth",router)
